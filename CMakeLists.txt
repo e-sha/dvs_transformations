@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.12)
-project(event_mapper)
+project(transformation)
 
 if (NOT TARGET pybind11)
   add_subdirectory(pybind11)
@@ -30,15 +30,15 @@ endif ()
 message(STATUS "output dir = ${output_dir}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${output_dir})
 
-PYBIND11_ADD_MODULE(event_mapper SHARED ${sources} ${headers})
+PYBIND11_ADD_MODULE(transformation SHARED ${sources} ${headers})
 if (NOT ${EIGEN_OLD})
-  TARGET_LINK_LIBRARIES(event_mapper PRIVATE Eigen3::Eigen)
+  TARGET_LINK_LIBRARIES(transformation PRIVATE Eigen3::Eigen)
 endif()
-SET_TARGET_PROPERTIES(event_mapper PROPERTIES PREFIX "")
+SET_TARGET_PROPERTIES(transformation PROPERTIES PREFIX "")
 
 # write name of the file to MANIFEST file
 # it allows the setup.py to use all modules
 set(bin_list_file ${CMAKE_BINARY_DIR}/MANIFEST)
-add_custom_command(TARGET event_mapper
+add_custom_command(TARGET transformation
     COMMAND ${CMAKE_COMMAND} -E
-    echo $<TARGET_FILE:event_mapper> >> ${bin_list_file})
+    echo $<TARGET_FILE:transformation> >> ${bin_list_file})

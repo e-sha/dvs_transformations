@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "dvs_mapping.h"
+#include "transformation.h"
 
 using std::vector;
 using std::cerr;
@@ -15,7 +15,7 @@ using std::invalid_argument;
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(event_mapper, m) {
+PYBIND11_MODULE(transformation, m) {
   m.doc() = "module to convert a sequence of images to an event stream";
   m.def("map", &map_events, py::call_guard<py::gil_scoped_release>(),
       "Updates events according to the input mapping: e[dst] <- e[src],\n"

@@ -1,4 +1,4 @@
-#include <dvs_mapping.h>
+#include <transformation.h>
 #include <numeric>
 #include <iostream>
 #include <stdexcept>
@@ -9,15 +9,9 @@ using namespace pybind11::literals; // to bring in the `_a` literal
 
 using std::vector;
 using std::pair;
-using std::iota;
-using std::sort;
-using std::swap;
 using std::get;
 using std::make_pair;
 using std::unordered_map;
-using std::move;
-using std::cerr;
-using std::endl;
 using std::invalid_argument;
 using std::runtime_error;
 
@@ -71,7 +65,7 @@ Event_t map_events(EigenDRef<Event_t> &in_events,
 	// allocate memory for output events
 	Event_t out_events = Event_t::Zero(num_output, event_size);
 	if (!out_events.IsRowMajor)
-		runtime_error("I want to make a row-major matrix for events");
+		runtime_error("I want to make a row-major matrix for events, but made a column-major");
 
 	// write output
 	int j = 0;
