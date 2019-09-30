@@ -3,7 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 
-using py::EigenDRef;
+using Eigen::Ref;
 
 using namespace pybind11::literals; // to bring in the `_a` literal
 
@@ -32,10 +32,10 @@ auto to_pair(std::tuple<T...> t)
 	return std::make_pair(std::get<I>(t), std::get<J>(t));
 }
 
-Event_t map_events(EigenDRef<Event_t> &in_events,
+Event_t map_events(Ref<Event_t> &in_events,
 	 	std::tuple<int, int> in_shape,
-	 	EigenDRef<VectorXull> &in_src,
-	 	EigenDRef<VectorXull> &in_dst) {
+	 	Ref<VectorXull> &in_src,
+	 	Ref<VectorXull> &in_dst) {
 
 	long int mapping_size = in_src.rows();
 	if (in_dst.rows() != mapping_size)
